@@ -41,7 +41,7 @@ File cfInstanceKeyFile = new File(classLoader.getResource("instance.key").getFil
 environmentVariables.set("CF_INSTANCE_CERT", cfInstanceCertFile.getAbsolutePath());
 environmentVariables.set("CF_INSTANCE_KEY", cfInstanceKeyFile.getAbsolutePath());
 
-Version1 signature = new Version1("test-role");
+Signature signature = new Signature("test-role");
 try {
 
     Map<String,String> params = new LinkedHashMap<>();
