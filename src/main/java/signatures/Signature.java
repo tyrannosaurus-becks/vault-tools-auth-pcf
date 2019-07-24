@@ -5,14 +5,14 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
-public class Version1 {
+public class Signature {
 
     private final String role;
     private final String signingTime;
     private final String cfInstanceCertContents;
     private final String signature;
 
-    public Version1(String role) {
+    public Signature(String role) {
         // Get the components of the string we'll sign.
         String cfInstanceCert = Utilities.getFileBodyAt("CF_INSTANCE_CERT");
 
@@ -53,7 +53,7 @@ public class Version1 {
 
     @Override
     public String toString() {
-        return "Version1{" +
+        return "Signature{" +
                 "role='" + role + '\'' +
                 ", signingTime='" + signingTime + '\'' +
                 ", cfInstanceCertContents='" + cfInstanceCertContents + '\'' +

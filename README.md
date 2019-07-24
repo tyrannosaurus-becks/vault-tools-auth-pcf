@@ -41,14 +41,14 @@ File cfInstanceKeyFile = new File(classLoader.getResource("instance.key").getFil
 environmentVariables.set("CF_INSTANCE_CERT", cfInstanceCertFile.getAbsolutePath());
 environmentVariables.set("CF_INSTANCE_KEY", cfInstanceKeyFile.getAbsolutePath());
 
-Version1 version1 = new Version1("test-role");
+Version1 signature = new Version1("test-role");
 try {
 
     Map<String,String> params = new LinkedHashMap<>();
-    params.put("role", version1.getRole());
-    params.put("signing_time", version1.getSigningTime());
-    params.put("cf_instance_cert", version1.getCFInstanceCertContents());
-    params.put("signature", version1.getSignature());
+    params.put("role", signature.getRole());
+    params.put("signing_time", signature.getSigningTime());
+    params.put("cf_instance_cert", signature.getCFInstanceCertContents());
+    params.put("signature", signature.getSignature());
 
     Gson gson = new GsonBuilder().disableHtmlEscaping().create();
     String body = gson.toJson(params);

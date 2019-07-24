@@ -17,7 +17,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.EnvironmentVariables;
 
-public class Version1Tests {
+public class SignatureTests {
 
     @Rule
     public final EnvironmentVariables environmentVariables = new EnvironmentVariables();
@@ -31,13 +31,13 @@ public class Version1Tests {
         environmentVariables.set("CF_INSTANCE_KEY", cfInstanceKeyFile.getAbsolutePath());
 
         DateTime nowUTC = DateTime.now().withZone(DateTimeZone.UTC);
-        Version1 version1 = new Version1("test-role");
-        Assert.assertEquals("test-role", version1.getRole());
-        Assert.assertEquals(Utilities.getFileBodyAt("CF_INSTANCE_CERT"), version1.getCFInstanceCertContents());
-        Assert.assertEquals(344, version1.getSignature().length());
+        Signature signature = new Signature("test-role");
+        Assert.assertEquals("test-role", signature.getRole());
+        Assert.assertEquals(Utilities.getFileBodyAt("CF_INSTANCE_CERT"), signature.getCFInstanceCertContents());
+        Assert.assertEquals(344, signature.getSignature().length());
 
         // Assert that there is no more than 1 second between now and the signing time.
-        DateTime signingTime = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(version1.getSigningTime());
+        DateTime signingTime = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(signature.getSigningTime());
         long millisBetween = signingTime.getMillis() - nowUTC.getMillis();
         Assert.assertTrue(millisBetween < 1000);
     }
@@ -52,14 +52,14 @@ public class Version1Tests {
         environmentVariables.set("CF_INSTANCE_CERT", cfInstanceCertFile.getAbsolutePath());
         environmentVariables.set("CF_INSTANCE_KEY", cfInstanceKeyFile.getAbsolutePath());
 
-        Version1 version1 = new Version1("test-role");
+        Signature signature = new Signature("test-role");
         try {
 
             Map<String,String> params = new LinkedHashMap<>();
-            params.put("role", version1.getRole());
-            params.put("signing_time", version1.getSigningTime());
-            params.put("cf_instance_cert", version1.getCFInstanceCertContents());
-            params.put("signature", version1.getSignature());
+            params.put("role", signature.getRole());
+            params.put("signing_time", signature.getSigningTime());
+            params.put("cf_instance_cert", signature.getCFInstanceCertContents());
+            params.put("signature", signature.getSignature());
 
             Gson gson = new GsonBuilder().disableHtmlEscaping().create();
             String body = gson.toJson(params);
