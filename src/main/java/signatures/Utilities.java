@@ -20,7 +20,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Utilities {
+class Utilities {
 
     // Private constructor to prevent instantiation.
     private Utilities() {
@@ -43,11 +43,11 @@ public class Utilities {
         }
     }
 
-    public static String getStringToSign(String role, String signingTimeStr, String cfInstanceCert) {
+    static String getStringToSign(String role, String signingTimeStr, String cfInstanceCert) {
         return signingTimeStr + cfInstanceCert + role;
     }
 
-    public static String generateSignature(String privateKeyPem, byte[] data) {
+    static String generateSignature(String privateKeyPem, byte[] data) {
         try (PEMParser pemParser = new PEMParser(new StringReader(privateKeyPem))) {
             PEMKeyPair pemKeyPair = (PEMKeyPair) pemParser.readObject();
 

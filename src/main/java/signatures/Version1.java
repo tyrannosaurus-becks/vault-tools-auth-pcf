@@ -23,14 +23,10 @@ public class Version1 {
 
         // Concatenate them to build our string to sign.
         String stringToSign = Utilities.getStringToSign(role, signingTimeStr, cfInstanceCert);
-        System.out.println("*************************SIGNING*************************");
-        System.out.println(stringToSign);
 
         // Sign it.
         String cfInstanceKey = Utilities.getFileBodyAt("CF_INSTANCE_KEY");
         String signature = Utilities.generateSignature(cfInstanceKey, stringToSign.getBytes());
-        System.out.println("*************************SIGNATURE*************************");
-        System.out.println(signature);
 
         // Populate it.
         this.role = role;
