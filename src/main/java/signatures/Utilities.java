@@ -64,7 +64,7 @@ class Utilities {
             signer.update(data, 0, data.length);
             byte[] signature = signer.generateSignature();
 
-            return java.util.Base64.getUrlEncoder().encodeToString(signature);
+            return "v1:" + java.util.Base64.getEncoder().encodeToString(signature);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
